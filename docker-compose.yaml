@@ -7,11 +7,10 @@ services:
     tty: true
     restart: unless-stopped
     image: ollama/ollama:${OLLAMA_DOCKER_TAG-latest}
+    ports:
+      - ${OLLAMA_PORT_BIND-0.0.0.0:11434}:11434
 
   open-webui:
-    build:
-      context: .
-      dockerfile: Dockerfile
     image: ghcr.io/open-webui/open-webui:${WEBUI_DOCKER_TAG-main}
     container_name: open-webui
     volumes:
@@ -30,3 +29,4 @@ services:
 volumes:
   ollama: {}
   open-webui: {}
+  
